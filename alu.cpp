@@ -25,7 +25,7 @@ int main(){
         char A2[32] = "0000111110100110010110010000000";
         char B2[32] = "0011001011011110001001010101010";
         char Cin2[2] = "0";  
-        
+        int alu_control;
         int a2[32];
         int b2[32];
         int bb[32];
@@ -71,15 +71,35 @@ int main(){
         switch (alu_control)
         {
             case 0:  // EQU
+                OUT = 0;
+                oVerflow = 0;
+                Carry = 0;
+                Zero = compare(A,B,alu_control);   
                 break;
             case 1: //LESS_THAN
-                break;
+                OUT = 0;
+                Zero = compare(A,B,alu_control);
+                oVerflow = 0;
+                Carry = 0;
+            break;
             case 2: //LESS_THAN UNSIGNED
-                break;
+                OUT = 0;
+                Zero = compare(A,B,alu_control);
+                oVerflow = 0;
+                Carry = 0;
+            break;
             case 3: //GREATER_THAN
-                break;
+                OUT = 0;
+                Zero = compare(A,B,alu_control);
+                oVerflow = 0;
+                Carry = 0;
+            break;
             case 4: //GREATER_THAN UNSIGNED
-                break;
+                OUT = 0;
+                Zero = compare(A,B,alu_control);
+                oVerflow = 0;
+                Carry = 0;
+            break;
             case 5: // ADD
                 break;
             case 6: // ADD UNSIGNED
@@ -93,10 +113,22 @@ int main(){
             case 10: // SHIFT RIGHT ARITMETIC
                 break;
             case 11: // BITWISE OR
-                break;
+                OUT = logical(A,B,alu_control);
+                Zero = 0;
+                oVerflow = 0; 
+                Carry = 0;  
+            break;
             case 12: // BITWISE XOR
-                break;
+                OUT = logical(A,B,alu_control);
+                Zero = 0;
+                oVerflow = 0;
+                Carry = 0; 
+            break;
             case 13: // BITWISE AND
+                OUT = logical(A,B,alu_control);
+                Zero = 0;
+                oVerflow = 0;
+                Carry = 0;
                 break;
             default:
                 break;
@@ -146,7 +178,7 @@ int main(){
 }
 
 
-int compare(int cod){
+int compare(int a2, int b2, int cod){
     int result;
     unsigned int a2_unsigned;
     unsigned int b2_unsigned;
@@ -247,7 +279,7 @@ int compare(int cod){
     return result;
 }
 
-int logical(int cod){
+int logical(int a2, int b2, int cod){
     int result;
     switch (cod)
     {
@@ -289,13 +321,31 @@ int logical(int cod){
     return result;
 }
 
+int shift(int a2, int b2, int cod){
+    int result;
+    switch (cod)
+    {
+        case 0: // SHIFT LEFT LOGICAL
+            result= a2 << b2;
+        break;
+        case 1: // SHIFT RIGHT LOGICAL
+            result= a2 >> b2;
+        break;
+        case 2: // SHIFT RIGHT ARITMETIC
+            
+        break;
+    
+        default:
+            break;
+    }
+}
 
 int to_int(int A){
  /*Makes an int out of input A (32 bits)*/
  int result;
- char zero[2] = "0";
+ char zero2[2] = "0";
         for(int i=0; i<32; i++){
-            if(A[i] == zero[0]){
+            if(A[i] == zero2[0]){
                 result[i] = 0;
             }
             else{
