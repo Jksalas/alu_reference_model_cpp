@@ -166,12 +166,15 @@ int main(){
     return 0;
 }
 
-
-int compare(int a2, int b2, int cod){
+int compare(int a2, int b2){
     int result;
-    unsigned int a2_unsigned;
-    unsigned int b2_unsigned;
-    switch (cod)
+    unsigned int a2_unsigned, b2_unsigned;
+    int cod=0;
+    for(int i = 0; i < 5; i++)
+    {
+        
+    
+    switch (i)
     {
         case 0:
         /**************************/
@@ -183,7 +186,7 @@ int compare(int a2, int b2, int cod){
             else{
                 result=0;
                 } 
-            }
+            
             cout << "\n Result of EQU is: ";
             cout << result;
             cout << "\n";
@@ -210,8 +213,9 @@ int compare(int a2, int b2, int cod){
         /**************************/
         //     LESS THAN UNSIGNED
         /**************************/
-            a2_unsigned= abs(a2);
-            b2_unsigned= abs(b2);
+            a2_unsigned= (unsigned int)a2;
+            b2_unsigned= (unsigned int)b2;
+            //unsigned int j = (unsigned int)i;
             if(a2_unsigned<b2_unsigned){
                 result=1;
             }
@@ -244,8 +248,8 @@ int compare(int a2, int b2, int cod){
          /**************************/
         //   GREATER THAN UNSIGNED
         /**************************/
-            a2_unsigned= abs(a2);
-            b2_unsigned= abs(b2);
+            a2_unsigned= (unsigned int)a2;
+            b2_unsigned= (unsigned int)b2;
             if(a2_unsigned>b2_unsigned){
                 result=1;
             }
@@ -264,6 +268,7 @@ int compare(int a2, int b2, int cod){
             cout << result;
             cout << "\n";
             break;
+    }
     }
     return result;
 }
@@ -304,7 +309,7 @@ int logical(int a2, int b2, int cod){
             result=0;
             cout << "\n No logical operation was done";
             cout << result;
-            cout << "\n;"
+            cout << "\n";
             break;
     }
     return result;
