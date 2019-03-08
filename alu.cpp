@@ -21,7 +21,9 @@ int main(){
         //        32-bit ALU
         /**************************/
 
-        //inputs
+        //-----------------------
+        //      inputs
+        //-----------------------
         char A2[32] = "0000111110100110010110010000000";
         char B2[32] = "0011001011011110001001010101010";
         char Cin2[2] = "0";  
@@ -30,8 +32,11 @@ int main(){
         int b2[32];
         int bb[32];
         int Result2[32];
-        //outputs
-        int Zero,oVerflow,Negative,Carry_out,OUT;
+        //-----------------------
+        //      outputs
+        //-----------------------
+
+        int Zero,oVerflow,Negative,Carry,OUT;
         
         
         a2=to_int(A2);
@@ -100,17 +105,31 @@ int main(){
                 oVerflow = 0;
                 Carry = 0;
             break;
+
             case 5: // ADD
                 break;
             case 6: // ADD UNSIGNED
                 break;
             case 7: // SUB UNSIGNED
                 break;
+
             case 8: // SHIFT LEFT LOGICAL
-                break;
+                OUT = shift(A,B,alu_control);
+                Zero = 0;
+                oVerflow = 0;
+                Carry = 0;
+            break;
             case 9: // SHIFT RIGHT LOGICAL
+                OUT = shift(A,B,alu_control);
+                Zero = 0;
+                oVerflow = 0;
+                Carry = 0;
                 break;
             case 10: // SHIFT RIGHT ARITMETIC
+                OUT = shift(A,B,alu_control);
+                Zero = 0;
+                oVerflow = 0;
+                Carry = 0;
                 break;
             case 11: // BITWISE OR
                 OUT = logical(A,B,alu_control);
@@ -133,36 +152,6 @@ int main(){
             default:
                 break;
         }
-
-        /*AND*/
-        for(int i=0; i<32; i++){
-            Result2[i] = a2[i]&b2[i];
-            }
-        cout << "\nThe Result of AND is: ";
-        for(int i=0;i<32;i++){
-            cout << Result2[i];
-        }
-        cout << "\n";
-        /*OR*/
-        for(int i=0; i<32; i++){
-            Result2[i] = a2[i]|b2[i];
-            }
-        cout << "The Result of OR is:  ";
-        for(int i=0;i<32;i++){
-            cout << Result2[i];
-        }
-        cout << "\n";
-
-
-        /*XOR*/
-        for(int i=0; i<32; i++){
-            Result2[i] = a2[i]^b2[i];
-            }
-        cout << "The Result of XOR is: ";
-        for(int i=0;i<32;i++){
-            cout << Result2[i];
-        }
-        cout << "\n";
 
 
         /*Sub*/
@@ -188,32 +177,32 @@ int compare(int a2, int b2, int cod){
         /**************************/
         //        EQU
         /**************************/
-        if(a2==b2){
-            result=1;
+            if(a2==b2){
+                result=1;
+                }
+            else{
+                result=0;
+                } 
             }
-        else{
-            result=0;
-            } 
-        }
-        cout << "\n Result of EQU is: ";
-        cout << result;
-        cout << "\n";
+            cout << "\n Result of EQU is: ";
+            cout << result;
+            cout << "\n";
         break;
     
         case 1:
         /**************************/
         //        LESS THAN
         /**************************/
-        if(a2<b2){
-            result=1;
-        }
-        else
-        {
-            result=0;
-        }
-        cout << "\n Result of LESS THAN is: ";
-        cout << result;
-        cout << "\n";
+            if(a2<b2){
+                result=1;
+            }
+            else
+            {
+                result=0;
+            }
+            cout << "\n Result of LESS THAN is: ";
+            cout << result;
+            cout << "\n";
         break;
 
     
@@ -221,52 +210,52 @@ int compare(int a2, int b2, int cod){
         /**************************/
         //     LESS THAN UNSIGNED
         /**************************/
-        a2_unsigned= abs(a2);
-        b2_unsigned= abs(b2);
-        if(a2_unsigned<b2_unsigned){
-            result=1;
-        }
-        else
-        {
-            result=0;
-        }
-        cout << "\n Result of LESS THAN UNSIGNED is: ";
-        cout << result;
-        cout << "\n";
+            a2_unsigned= abs(a2);
+            b2_unsigned= abs(b2);
+            if(a2_unsigned<b2_unsigned){
+                result=1;
+            }
+            else
+            {
+                result=0;
+            }
+            cout << "\n Result of LESS THAN UNSIGNED is: ";
+            cout << result;
+            cout << "\n";
         break;
     
         case 3:
         /**************************/
         //     GREATER THAN
         /**************************/
-        if(a2>b2){
-            result=1;
-        }
-        else
-        {
-            result=0;
-        }
-        cout << "\n Result of GREATER THAN is: ";
-        cout << result;
-        cout << "\n";
+            if(a2>b2){
+                result=1;
+            }
+            else
+            {
+                result=0;
+            }
+            cout << "\n Result of GREATER THAN is: ";
+            cout << result;
+            cout << "\n";
         
         break;
         case 4:
          /**************************/
         //   GREATER THAN UNSIGNED
         /**************************/
-        a2_unsigned= abs(a2);
-        b2_unsigned= abs(b2);
-        if(a2_unsigned>b2_unsigned){
-            result=1;
-        }
-        else
-        {
-            result=0;
-        }
-        cout << "\n Result of GREATER THAN UNSIGNED is: ";
-        cout << result;
-        cout << "\n";
+            a2_unsigned= abs(a2);
+            b2_unsigned= abs(b2);
+            if(a2_unsigned>b2_unsigned){
+                result=1;
+            }
+            else
+            {
+                result=0;
+            }
+            cout << "\n Result of GREATER THAN UNSIGNED is: ";
+            cout << result;
+            cout << "\n";
         break;
     
         default:
@@ -287,28 +276,28 @@ int logical(int a2, int b2, int cod){
         /**************************/
         //   BITWISE OR
         /**************************/
-        result= a2 | b2;
-        cout << "\n Result of BITWISE OR is: ";
-        cout << result;
-        cout << "\n";
+            result= a2 | b2;
+            cout << "\n Result of BITWISE OR is: ";
+            cout << result;
+            cout << "\n";
         break;
         case 1:
         /**************************/
         //   BITWISE XOR
         /**************************/
-        result= a2 ^ b2;
-        cout << "\n Result of BITWISE XOR is: ";
-        cout << result;
-        cout << "\n";
+            result= a2 ^ b2;
+            cout << "\n Result of BITWISE XOR is: ";
+            cout << result;
+            cout << "\n";
         break;
         case 2:
         /**************************/
         //   BITWISE AND
         /**************************/
-        result= a2 & b2;
-        cout << "\n Result of  BITWISE AND is: ";
-        cout << result;
-        cout << "\n";
+            result= a2 & b2;
+            cout << "\n Result of  BITWISE AND is: ";
+            cout << result;
+            cout << "\n";
         break;
     
         default:
@@ -323,21 +312,53 @@ int logical(int a2, int b2, int cod){
 
 int shift(int a2, int b2, int cod){
     int result;
+    unsigned int a2_unsigned;
+    unsigned int b2_unsigned;
     switch (cod)
     {
         case 0: // SHIFT LEFT LOGICAL
             result= a2 << b2;
         break;
         case 1: // SHIFT RIGHT LOGICAL
-            result= a2 >> b2;
+            a2_unsigned= abs(a2);
+            b2_unsigned= abs(b2);
+            result= a2_unsigned >> b2_unsigned;
         break;
         case 2: // SHIFT RIGHT ARITMETIC
-            
+            result= a2 >> b2;
         break;
     
         default:
+            result=0;
+            cout << "\n No shift operation was done";
+            cout << result;
+            cout << "\n";
+            break;
+
+    }
+    return result;
+}
+
+int aritmetic(int a, int b, int cod){
+    int result[2];  //result[0]: resultado de la operación , result[1]: carry out  
+    switch (cod)
+    {
+        case 0: // ADD
+            
+        break;
+
+        case 1: // ADD UNSIGNED
+
+        break;
+
+        case 2: // SUB UNSIGNED 
+
+        break;
+
+        default:
             break;
     }
+    return result;
 }
 
 int to_int(int A){
