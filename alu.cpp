@@ -15,6 +15,7 @@
 #include <math.h>
 #include <fstream>
 #include <string>
+#include <bitset>
  
 using namespace std;
 
@@ -37,6 +38,7 @@ int compare(int a2, int b2,int cod){
             
             cout << "\n Result of EQU is: ";
             cout << result;
+            cout << "\n Result of EQU in binary: " << bitset<32>(result);
             cout << "\n";
         break;
     
@@ -53,6 +55,7 @@ int compare(int a2, int b2,int cod){
             }
             cout << "\n Result of LESS THAN is: ";
             cout << result;
+            cout << "\n Result of LESS THAN in binary: " << bitset<32>(result);
             cout << "\n";
         break;
 
@@ -73,6 +76,7 @@ int compare(int a2, int b2,int cod){
             }
             cout << "\n Result of LESS THAN UNSIGNED is: ";
             cout << result;
+            cout << "\n Result of LESS THAN UNSIGNED in binary: " << bitset<32>(result);
             cout << "\n";
         break;
     
@@ -89,6 +93,7 @@ int compare(int a2, int b2,int cod){
             }
             cout << "\n Result of GREATER THAN is: ";
             cout << result;
+            cout << "\n Result of GREATER THAN in binary: " << bitset<32>(result);
             cout << "\n";
         
         break;
@@ -107,6 +112,7 @@ int compare(int a2, int b2,int cod){
             }
             cout << "\n Result of GREATER THAN UNSIGNED is: ";
             cout << result;
+            cout << "\n Result of GREATER THAN UNSIGNED in binary: " << bitset<32>(result);
             cout << "\n";
         break;
     
@@ -132,6 +138,7 @@ int logical(int a2, int b2, int cod){
             result= a2 | b2;
             cout << "\n Result of BITWISE OR is: ";
             cout << result;
+            cout << "\n Result of BITWISE OR in binary: " << bitset<32>(result);
             cout << "\n";
         break;
         case 12:
@@ -141,6 +148,7 @@ int logical(int a2, int b2, int cod){
             result= a2 ^ b2;
             cout << "\n Result of BITWISE XOR is: ";
             cout << result;
+            cout << "\n Result of BITWISE XOR in binary: " << bitset<32>(result);
             cout << "\n";
         break;
         case 13:
@@ -150,6 +158,7 @@ int logical(int a2, int b2, int cod){
             result= a2 & b2;
             cout << "\n Result of  BITWISE AND is: ";
             cout << result;
+            cout << "\n Result of BITWISE AND in binary: " << bitset<32>(result);
             cout << "\n";
         break;
     
@@ -172,6 +181,7 @@ int shift(int a2, int b2, int cod){
             result= a2 << b2;
             cout << "\n Result of  SHIFT LEFT LOGICAL is: ";
             cout << result;
+            cout << "\n Result of SHIFT LEFT LOGICAL in binary: " << bitset<32>(result);
             cout << "\n";
         break;
         case 9: // SHIFT RIGHT LOGICAL
@@ -180,12 +190,14 @@ int shift(int a2, int b2, int cod){
             result= a2_unsigned >> b2_unsigned;
             cout << "\n Result of  SHIFT RIGHT LOGICAL is: ";
             cout << result;
+            cout << "\n Result of SHIFT RIGHT LOGICAL in binary: " << bitset<32>(result);
             cout << "\n";
         break;
         case 10: // SHIFT RIGHT ARITMETIC
             result= a2 >> b2;
             cout << "\n Result of  SHIFT RIGHT ARITHMETIC is: ";
             cout << result;
+            cout << "\n Result of SHIFT RIGHT ARITHMETIC in binary: " << bitset<32>(result);
             cout << "\n";
         break;
     
@@ -264,13 +276,18 @@ int alu(int A, int B,int alu_control){
 
         int Zero,oVerflow,Negative,Carry,OUT;
         
-
+        cout << "\n";
+        cout << "--------------------\n";
         cout << "32 bit ALU" << endl;
         cout << "--------------------";
         cout << "\nThe first input is:                 ";
         cout << A;
+        cout << "\nFirst input in binary: " << bitset<32>(A);
         cout << "\nThe second input is:                ";
         cout << B;
+        cout << "\nSecond input in binary: " << bitset<32>(B);
+        
+        
         
         switch (alu_control)
         {
@@ -361,16 +378,48 @@ int alu(int A, int B,int alu_control){
 }
 
 
+/*
+int to_string (int a)
+{
+  
+  string binary  ("");
+    int mask = 1;
+    for(int i = 0; i < 31; i++)
+    {
+    if((mask&a) >= 1)
+        binary = "1"+binary;
+    else
+        binary = "0"+binary;
+     mask<<=1;
+ }
+ cout<<binary<<endl;
+
+ return 0;
+ }
+*/
+string DecimalToBinaryString(int a)
+{
+    std::string s = std::bitset< 64 >( 12345 ).to_string(); // string conversion
+
+    std::cout << std::bitset< 64 >( 54321 ) << ' '; // direct output
+
+std::bitset< 64 > input;
+std::cin >> input;
+unsigned long ul = input.to_ulong();
+
+}
+
 int main(){
     int a;
     int b;
     int select;
+    
     for(int i = 0; i < 20; i++)
     {
-        a= rand() % 100; 
-        b= rand() % 100; 
-        select= rand() % 13; 
-        alu(a,b,select);
+            a= rand() % 100;   
+            b= rand() % 100;  
+            select=rand()%13;
+            alu(a,b,select);
     }
 }
 
