@@ -11,170 +11,18 @@
 #include <iostream>
 #include <cstdlib>
 #include <string> 
+#include <stdlib.h> 
 #include <math.h>
-
+#include <fstream>
+#include <string>
  
 using namespace std;
-int main(){
-
-        /**************************/
-        //        32-bit ALU
-        /**************************/
-
-        //-----------------------
-        //      inputs
-        //-----------------------
-        char A2[32] = "0000111110100110010110010000000";
-        char B2[32] = "0011001011011110001001010101010";
-        char Cin2[2] = "0";  
-        int alu_control;
-        int a2[32];
-        int b2[32];
-        int bb[32];
-        int Result2[32];
-        //-----------------------
-        //      outputs
-        //-----------------------
-
-        int Zero,oVerflow,Negative,Carry,OUT;
-        
-        
-        a2=to_int(A2);
-        b2=to_int(B2);
 
 
-        /*Makes an int out of input B INVERSE using twos compliment*/
-        for(int i=0; i<32; i++){
-            if(B2[i] == zero2[0]){
-                bb[i] = 1;
-            }
-            else{
-                bb[i] = 0;
-            }
-        }
-        bb[31]++;
-
-        cout << "32 bit ALU" << endl;
-        cout << "--------------------";
-        cout << "\nThe first input is:                 ";
-        for(int i=0; i<32; i++){
-            cout << a2[i];
-            }
-        cout << "\nThe second input is:                ";
-        for(int i=0; i<32; i++){
-            cout << b2[i];
-            }
-        cout << "\nThe INVERSE of the second input is: ";
-        for(int i=0; i<32; i++){
-            cout << bb[i];
-            }
-        cout << "\nThe carry-in is:                    ";
-        for(int i=0;i<1;i++){
-            cout << Cin2[i];
-        }
-        
-        switch (alu_control)
-        {
-            case 0:  // EQU
-                OUT = 0;
-                oVerflow = 0;
-                Carry = 0;
-                Zero = compare(A,B,alu_control);   
-                break;
-            case 1: //LESS_THAN
-                OUT = 0;
-                Zero = compare(A,B,alu_control);
-                oVerflow = 0;
-                Carry = 0;
-            break;
-            case 2: //LESS_THAN UNSIGNED
-                OUT = 0;
-                Zero = compare(A,B,alu_control);
-                oVerflow = 0;
-                Carry = 0;
-            break;
-            case 3: //GREATER_THAN
-                OUT = 0;
-                Zero = compare(A,B,alu_control);
-                oVerflow = 0;
-                Carry = 0;
-            break;
-            case 4: //GREATER_THAN UNSIGNED
-                OUT = 0;
-                Zero = compare(A,B,alu_control);
-                oVerflow = 0;
-                Carry = 0;
-            break;
-
-            case 5: // ADD
-                break;
-            case 6: // ADD UNSIGNED
-                break;
-            case 7: // SUB UNSIGNED
-                break;
-
-            case 8: // SHIFT LEFT LOGICAL
-                OUT = shift(A,B,alu_control);
-                Zero = 0;
-                oVerflow = 0;
-                Carry = 0;
-            break;
-            case 9: // SHIFT RIGHT LOGICAL
-                OUT = shift(A,B,alu_control);
-                Zero = 0;
-                oVerflow = 0;
-                Carry = 0;
-                break;
-            case 10: // SHIFT RIGHT ARITMETIC
-                OUT = shift(A,B,alu_control);
-                Zero = 0;
-                oVerflow = 0;
-                Carry = 0;
-                break;
-            case 11: // BITWISE OR
-                OUT = logical(A,B,alu_control);
-                Zero = 0;
-                oVerflow = 0; 
-                Carry = 0;  
-            break;
-            case 12: // BITWISE XOR
-                OUT = logical(A,B,alu_control);
-                Zero = 0;
-                oVerflow = 0;
-                Carry = 0; 
-            break;
-            case 13: // BITWISE AND
-                OUT = logical(A,B,alu_control);
-                Zero = 0;
-                oVerflow = 0;
-                Carry = 0;
-                break;
-            default:
-                break;
-        }
-
-
-        /*Sub*/
-        for(int i=0; i<32; i++){
-            Result2[i] = a2[i]|bb[i];
-            }
-        cout << "The Result of Sub is: ";
-        for(int i=0;i<32;i++){
-            cout << Result2[i];
-        }
-        cout << "\n";
-    return 0;
-}
-
-int compare(int a2, int b2){
+int compare(int a2, int b2,int cod){
     int result;
     unsigned int a2_unsigned, b2_unsigned;
-    int cod=0;
-    for(int i = 0; i < 5; i++)
-    {
-        
-    
-    switch (i)
+    switch (cod)
     {
         case 0:
         /**************************/
@@ -269,7 +117,7 @@ int compare(int a2, int b2){
             cout << "\n";
             break;
     }
-    }
+
     return result;
 }
 
@@ -277,7 +125,7 @@ int logical(int a2, int b2, int cod){
     int result;
     switch (cod)
     {
-        case 0:
+        case 11:
         /**************************/
         //   BITWISE OR
         /**************************/
@@ -286,7 +134,7 @@ int logical(int a2, int b2, int cod){
             cout << result;
             cout << "\n";
         break;
-        case 1:
+        case 12:
         /**************************/
         //   BITWISE XOR
         /**************************/
@@ -295,7 +143,7 @@ int logical(int a2, int b2, int cod){
             cout << result;
             cout << "\n";
         break;
-        case 2:
+        case 13:
         /**************************/
         //   BITWISE AND
         /**************************/
@@ -314,23 +162,31 @@ int logical(int a2, int b2, int cod){
     }
     return result;
 }
-
 int shift(int a2, int b2, int cod){
     int result;
     unsigned int a2_unsigned;
     unsigned int b2_unsigned;
     switch (cod)
     {
-        case 0: // SHIFT LEFT LOGICAL
+        case 8: // SHIFT LEFT LOGICAL
             result= a2 << b2;
+            cout << "\n Result of  SHIFT LEFT LOGICAL is: ";
+            cout << result;
+            cout << "\n";
         break;
-        case 1: // SHIFT RIGHT LOGICAL
-            a2_unsigned= abs(a2);
-            b2_unsigned= abs(b2);
+        case 9: // SHIFT RIGHT LOGICAL
+            a2_unsigned= (unsigned int)a2;
+            b2_unsigned= (unsigned int)b2;
             result= a2_unsigned >> b2_unsigned;
+            cout << "\n Result of  SHIFT RIGHT LOGICAL is: ";
+            cout << result;
+            cout << "\n";
         break;
-        case 2: // SHIFT RIGHT ARITMETIC
+        case 10: // SHIFT RIGHT ARITMETIC
             result= a2 >> b2;
+            cout << "\n Result of  SHIFT RIGHT ARITHMETIC is: ";
+            cout << result;
+            cout << "\n";
         break;
     
         default:
@@ -344,20 +200,26 @@ int shift(int a2, int b2, int cod){
     return result;
 }
 
+
 int aritmetic(int a, int b, int cod){
-    int result[2];  //result[0]: resultado de la operación , result[1]: carry out  
+    int result;  //result[0]: resultado de la operación , result[1]: carry out 
+    int oVerflow;
     switch (cod)
     {
         case 0: // ADD
+
+                cout << "";
+            
             
         break;
 
         case 1: // ADD UNSIGNED
+                cout << "";
 
         break;
 
         case 2: // SUB UNSIGNED 
-
+            cout << "";
         break;
 
         default:
@@ -366,8 +228,9 @@ int aritmetic(int a, int b, int cod){
     return result;
 }
 
+/*
 int to_int(int A){
- /*Makes an int out of input A (32 bits)*/
+ /*Makes an int out of input A (32 bits)
  int result;
  char zero2[2] = "0";
         for(int i=0; i<32; i++){
@@ -380,12 +243,136 @@ int to_int(int A){
         }
         return result;
 }
+*/
 
 
+int alu(int A, int B,int alu_control){
+
+        /**************************/
+        //        32-bit ALU
+        /**************************/
+
+        //--------------------------------------------
+        //      inputs:
+        // A first alu operand, B: second operand
+        // alu_control: select variable
+        //--------------------------------------------
+        
+        //-----------------------
+        //      outputs
+        //-----------------------
+
+        int Zero,oVerflow,Negative,Carry,OUT;
         
 
+        cout << "32 bit ALU" << endl;
+        cout << "--------------------";
+        cout << "\nThe first input is:                 ";
+        cout << A;
+        cout << "\nThe second input is:                ";
+        cout << B;
+        
+        switch (alu_control)
+        {
+            case 0:  // EQU
+                OUT = 0;
+                oVerflow = 0;
+                Carry = 0;
+                Zero = compare(A,B,alu_control);   
+                break;
+            case 1: //LESS_THAN
+                OUT = 0;
+                Zero = compare(A,B,alu_control);
+                oVerflow = 0;
+                Carry = 0;
+            break;
+            case 2: //LESS_THAN UNSIGNED
+                OUT = 0;
+                Zero = compare(A,B,alu_control);
+                oVerflow = 0;
+                Carry = 0;
+            break;
+            case 3: //GREATER_THAN
+                OUT = 0;
+                Zero = compare(A,B,alu_control);
+                oVerflow = 0;
+                Carry = 0;
+            break;
+            case 4: //GREATER_THAN UNSIGNED
+                OUT = 0;
+                Zero = compare(A,B,alu_control);
+                oVerflow = 0;
+                Carry = 0;
+            break;
+
+            case 5: // ADD
+                cout << "Not found";
+                break;
+            case 6: // ADD UNSIGNED
+                cout << "Not found";
+                break;
+            case 7: // SUB UNSIGNED
+                cout << "Not found";
+                break;
+
+            case 8: // SHIFT LEFT LOGICAL
+                OUT = shift(A,B,alu_control);
+                Zero = 0;
+                oVerflow = 0;
+                Carry = 0;
+            break;
+            case 9: // SHIFT RIGHT LOGICAL
+                OUT = shift(A,B,alu_control);
+                Zero = 0;
+                oVerflow = 0;
+                Carry = 0;
+                break;
+            case 10: // SHIFT RIGHT ARITMETIC
+                OUT = shift(A,B,alu_control);
+                Zero = 0;
+                oVerflow = 0;
+                Carry = 0;
+                break;
+            case 11: // BITWISE OR
+                OUT = logical(A,B,alu_control);
+                Zero = 0;
+                oVerflow = 0; 
+                Carry = 0;  
+            break;
+            case 12: // BITWISE XOR
+                OUT = logical(A,B,alu_control);
+                Zero = 0;
+                oVerflow = 0;
+                Carry = 0; 
+            break;
+            case 13: // BITWISE AND
+                OUT = logical(A,B,alu_control);
+                Zero = 0;
+                oVerflow = 0;
+                Carry = 0;
+                break;
+            default:
+                break;
+        }
 
         
+        cout << "\n";
+    return 0;
+}
+
+
+int main(){
+    int a;
+    int b;
+    int select;
+    for(int i = 0; i < 20; i++)
+    {
+        a= rand() % 100; 
+        b= rand() % 100; 
+        select= rand() % 13; 
+        alu(a,b,select);
+    }
+}
 
         
 
